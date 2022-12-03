@@ -10,6 +10,15 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+const { Pool } = require('pg');
+
+const pool = new Pool({
+  user: 'vagrant',
+  password: '123',
+  host: 'localhost',
+  database: 'lightbnb'
+});
+
 app.use(cookieSession({
   name: 'session',
   keys: ['key1']
@@ -34,5 +43,5 @@ app.get("/test", (req, res) => {
   res.send("🤗");
 });
 
-const port = process.env.PORT || 3000; 
+const port = process.env.PORT || 3000;
 app.listen(port, (err) => console.log(err || `listening on port ${port} 😎`));
