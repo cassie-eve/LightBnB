@@ -45,7 +45,6 @@ const getUserWithId = function(id) {
       if (!result.rows.length) {
         return null;
       }
-      console.log(result.rows);
       return result.rows[0];
     })
     .catch((err) => {
@@ -54,8 +53,6 @@ const getUserWithId = function(id) {
     });
 };
 exports.getUserWithId = getUserWithId;
-
-console.log(getUserWithId(743));
 
 /**
  * Add a new user to the database.
@@ -103,8 +100,6 @@ const getAllReservations = function(guestId, limit = 10) {
 };
 exports.getAllReservations = getAllReservations;
 
-console.log(getAllReservations(743, 100));
-
 /// Properties
 
 /**
@@ -130,7 +125,8 @@ const getAllProperties = function(options, limit = 10) {
     if (queryParams.indexOf(`%${options.city}%`) <= queryParams.length) {
       queryString += 'AND ';
     }
-    queryString += `city LIKE $${queryParams.length} `;
+    queryString += `LOWER (city) LIKE $${queryParams.length} 
+    `;
   }
 
   //my add-ins
@@ -198,7 +194,6 @@ const addProperty = function(property) {
       if (!result.rows.length) {
         return null;
       }
-      console.log(result.rows);
       return result.rows[0];
     })
     .catch((err) => {
