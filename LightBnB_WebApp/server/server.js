@@ -10,15 +10,6 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-const { Pool } = require('pg');
-
-const pool = new Pool({
-  user: 'vagrant',
-  password: '123',
-  host: 'localhost',
-  database: 'lightbnb'
-});
-
 app.use(cookieSession({
   name: 'session',
   keys: ['key1']
